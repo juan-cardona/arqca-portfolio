@@ -7,8 +7,8 @@ import BlockText from './block-text'
 
 function ProjectPreview (props) {
   return (
-    <Link className=" flex-col md:flex-row" to={`/project/${props.slug.current}`}>
-      <div className="flex-1 bg-yellow-100">
+    <Link className="flex-col " to={`/project/${props.slug.current}`}>
+      <div className=" bg-red-800">
         {props.mainImage && props.mainImage.asset && (
           <img
             src={imageUrlFor(buildImageObj(props.mainImage))
@@ -20,7 +20,7 @@ function ProjectPreview (props) {
           />
         )}
       </div>
-      <h3 className="hover:underline">{props.title}</h3>
+      <h3 className="hover:underline mt-4">{props.title}</h3>
       {props._rawExcerpt && (
         <div className="m-2">
           <BlockText blocks={props._rawExcerpt} />

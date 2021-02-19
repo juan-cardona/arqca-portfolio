@@ -5,9 +5,9 @@ import ProjectPreview from './project-preview'
 
 function ProjectPreviewGrid (props) {
   return (
-    <div className="m-8">
-      {props.title && <h2 className="text-xs tracking-wider font-semibold uppercase m-8">{props.title}</h2>}
-      <ul className="m-0 p-0 list-none grid grid-cols-1 gap-8">
+    <div className="m-6 ">
+      {props.title && <h2 className="text-md tracking-wider font-semibold uppercase m-8">{props.title}</h2>}
+      <ul className="m-0 p-0 grid grid-cols-1 md:grid-cols-3 gap-6">
         {props.nodes &&
           props.nodes.map(node => (
             <li className="" key={node.id}>
