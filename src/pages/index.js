@@ -1,50 +1,101 @@
 import React from "react"
-import { Link } from "gatsby"
 import { graphql } from "gatsby";
-
-import Layout from "../components/layout"
-import Image from "../components/image"
+import {
+  mapEdgesToNodes,
+  filterOutDocsWithoutSlugs,
+  filterOutDocsPublishedInTheFuture
+} from '../lib/helpers'
+import Container from '../components/container'
+import GraphQLErrorList from '../components/graphql-error-list'
+import ProjectPreviewGrid from '../components/project-preview-grid'
 import SEO from "../components/seo"
+import Layout from "../components/layout"
 
 
-const IndexPage = ({data}) => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <h1>{data.sanityProject.squareMeters}</h1>
-    <p className="leading-loose bg-red-500" >Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div className="block w-1/2 mx-auto  mb-3">
-      <Image />
-    </div>
-    <Link className="" to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const IndexPage = props => {
+  const {data, errors} = props
+
+  if (errors) {
+    return (
+      <Layout>
+        <GraphQLErrorList errors={errors} />
+      </Layout>
+    )
+  }
+
+  const site = (data || {}).site
+  const projectNodes = (data || {}).projects
+    ? mapEdgesToNodes(data.projects)
+      .filter(filterOutDocsWithoutSlugs)
+      .filter(filterOutDocsPublishedInTheFuture)
+    : []
+
+  if (!site) {
+    throw new Error(
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
+    )
+  }
+
+  return (
+    <Layout>
+      <SEO title={site.title} description={site.description} keywords={site.keywords} />
+      <Container>
+        <h1 hidden>Welcome to {site.title}</h1>
+        {projectNodes && (
+          <ProjectPreviewGrid
+            title='Latest projects'
+            nodes={projectNodes}
+            browseMoreHref='/archive/'
+          />
+        )}
+      </Container>
+    </Layout>
+  )
+}
 
 export default IndexPage
 
 export const query = graphql`
-query  {
-  sanityProject {
-    _id
-    title
-    description
-    body {
-      _key
-      _type
-      style
-      _rawChildren
+  query IndexPageQuery {
+    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
+      title
+      description
+      keywords
     }
-    squareMeters
-    ubicacion
-    mainImage {
-      asset {
-          fluid(maxWidth: 1200) {
-            ...GatsbySanityImageFluid
+    projects: allSanityProject(
+      limit: 6
+      filter: {slug: {current: {ne: null}}}
+    ) {
+      edges {
+        node {
+          id
+          mainImage {
+            crop {
+              _key
+              _type
+              top
+              bottom
+              left
+              right
+            }
+            hotspot {
+              _key
+              _type
+              x
+              y
+              height
+              width
+            }
+            asset {
+              _id
+            }
           }
+          title
+          slug {
+            current
+          }
+        }
       }
     }
   }
-}
 `
