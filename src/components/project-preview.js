@@ -7,8 +7,8 @@ import BlockText from './block-text'
 
 function ProjectPreview (props) {
   return (
-    <Link className="block" to={`/project/${props.slug.current}`}>
-      <div className="relative pb-6 bg-yellow-100">
+    <Link className=" flex-col md:flex-row" to={`/project/${props.slug.current}`}>
+      <div className="flex-1 bg-yellow-100">
         {props.mainImage && props.mainImage.asset && (
           <img
             src={imageUrlFor(buildImageObj(props.mainImage))
@@ -16,7 +16,7 @@ function ProjectPreview (props) {
               .height(Math.floor((9 / 16) * 600))
               .url()}
             alt={props.mainImage.alt}
-            className="absolute w-1/3 h-1/3 object-cover "
+            className="flex-1 w-full h-1/3 object-cover "
           />
         )}
       </div>
