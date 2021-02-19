@@ -12,11 +12,11 @@ import RoleList from './role-list'
 function Project (props) {
   const {_rawBody, title, categories, mainImage, members, publishedAt, relatedProjects} = props
   return (
-    <article className="">
+    <article className="flex-col">
       {props.mainImage && mainImage.asset && (
-        <div className="relative bg-yellow-50 pb-8">
+        <div className="flex bg-yellow-50 ">
           <img
-            className="absolute top-0 left-0 max-w-full max-h-full align-top object-cover"
+            className="flex-1 max-h-64 md:max-h-96 object-cover"
             src={imageUrlFor(buildImageObj(mainImage))
               .width(1200)
               .height(Math.floor((9 / 16) * 1200))
@@ -52,7 +52,7 @@ function Project (props) {
               </div>
             )}
             {relatedProjects && relatedProjects.length > 0 && (
-              <div className="border-t-2 bg-gray-200 m-8">
+              <div className="border-t-2 bg-gray-300 m-8">
                 <h3 className="text-base m-2">Related projects</h3>
                 <ul className="list-none m-3 p-0">
                   {relatedProjects.map(project => (
