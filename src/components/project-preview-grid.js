@@ -10,7 +10,7 @@ function ProjectPreviewGrid (props) {
       <ul className="m-0 p-0 list-none grid grid-cols-1 gap-8">
         {props.nodes &&
           props.nodes.map(node => (
-            <li key={node.id}>
+            <li className="" key={node.id}>
               <ProjectPreview {...node} />
             </li>
           ))}

@@ -1,3 +1,5 @@
+import {format} from 'date-fns'
+
 export default {
     name: 'project',
     title: 'Project',
@@ -12,52 +14,77 @@ export default {
         name: 'slug',
         title: 'Slug',
         type: 'slug',
+        description: 'Some frontend will require a slug to be set to be able to show the project',
         options: {
           source: 'title',
           maxLength: 96
         }
       },
       {
-        name: 'description',
-        title: 'Description',
-        type: 'text'
+        name: 'publishedAt',
+        title: 'Published at',
+        description: 'You can use this field to schedule projects where you show them',
+        type: 'datetime'
       },
       {
-        name: 'body',
-        title: 'Body',
+        name: 'excerpt',
+        title: 'Excerpt',
+        type: 'simplePortableText'
+      },
+      {
+        name: 'members',
+        title: 'Members',
         type: 'array',
-        of: [{type: 'block'}]
+        of: [{type: 'projectMember'}]
       },
       {
-        name: 'squareMeters',
-        title: 'Square Meters',
-        type: 'string'
+        name: 'startedAt',
+        title: 'Started at',
+        type: 'datetime'
       },
       {
-        name: 'ubicacion',
-        title: 'Ubicacion',
-        type: 'string'
+        name: 'endedAt',
+        title: 'Ended at',
+        type: 'datetime'
       },
       {
         name: 'mainImage',
         title: 'Main image',
-        type: 'image',
-        options: {
-          hotspot: true
-        }
+        type: 'figure'
       },
+      {
+        name: 'categories',
+        title: 'Categories',
+        type: 'array',
+        of: [{type: 'reference', to: {type: 'category'}}]
+      },
+      {
+        name: 'body',
+        title: 'Body',
+        type: 'projectPortableText'
+      },
+      {
+        name: 'relatedProjects',
+        title: 'Related projects',
+        type: 'array',
+        of: [{type: 'reference', to: {type: 'project'}}]
+      }
     ],
     preview: {
       select: {
         title: 'title',
-        description: 'name',
+        publishedAt: 'publishedAt',
+        slug: 'slug',
         media: 'mainImage'
       },
-      prepare(selection) {
-        const {author} = selection
-        return Object.assign({}, selection, {
-          subtitle: author && `by ${author}`
-        })
+      prepare({title = 'No title', publishedAt, slug = {}, media}) {
+        const dateSegment = format(publishedAt, 'YYYY/MM')
+        const path = `/${dateSegment}/${slug.current}/`
+        return {
+          title,
+          media,
+          subtitle: publishedAt ? path : 'Missing publishing date'
+        }
       }
     }
   }

@@ -10,8 +10,17 @@ import category from './category'
 import post from './post'
 import author from './author'
 import project from './project'
-
 import siteSettings from './documents/siteSettings'
+import person from './documents/person'
+
+
+// Object types
+import bioPortableText from './objects/bioPortableText'
+import figure from './objects/figure'
+import projectMember from './objects/projectMember'
+import projectPortableText from './objects/projectPortableText'
+import simplePortableText from './objects/simplePortableText'
+
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -30,5 +39,11 @@ export default createSchema({
     // { type: 'typename' } in other document schemas
     blockContent,
     siteSettings,
+    person,
+    bioPortableText,
+    figure,
+    projectMember,
+    projectPortableText,
+    simplePortableText
   ]),
 })

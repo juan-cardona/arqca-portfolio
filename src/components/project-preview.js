@@ -16,7 +16,7 @@ function ProjectPreview (props) {
               .height(Math.floor((9 / 16) * 600))
               .url()}
             alt={props.mainImage.alt}
-            className="absolute w-full h-full object-cover "
+            className="absolute w-1/3 h-1/3 object-cover "
           />
         )}
       </div>

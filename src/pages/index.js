@@ -1,5 +1,5 @@
-import React from "react"
-import { graphql } from "gatsby";
+import React from 'react'
+import {graphql} from 'gatsby'
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
@@ -8,9 +8,55 @@ import {
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import ProjectPreviewGrid from '../components/project-preview-grid'
-import SEO from "../components/seo"
-import Layout from "../components/layout"
+import SEO from '../components/seo'
+import Layout from '../containers/layout'
 
+
+export const query = graphql`
+  query IndexPageQuery {
+    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
+      title
+      description
+      keywords
+    }
+    projects: allSanityProject(
+      limit: 6
+      sort: {fields: [publishedAt], order: DESC}
+      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
+    ) {
+      edges {
+        node {
+          id
+          mainImage {
+            crop {
+              _key
+              _type
+              top
+              bottom
+              left
+              right
+            }
+            hotspot {
+              _key
+              _type
+              x
+              y
+              height
+              width
+            }
+            asset {
+              _id
+            }
+          }
+          title
+          slug {
+            current
+          }
+        }
+      }
+    }
+  }
+`
 
 const IndexPage = props => {
   const {data, errors} = props
@@ -54,48 +100,3 @@ const IndexPage = props => {
 }
 
 export default IndexPage
-
-export const query = graphql`
-  query IndexPageQuery {
-    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
-      title
-      description
-      keywords
-    }
-    projects: allSanityProject(
-      limit: 6
-      filter: {slug: {current: {ne: null}}}
-    ) {
-      edges {
-        node {
-          id
-          mainImage {
-            crop {
-              _key
-              _type
-              top
-              bottom
-              left
-              right
-            }
-            hotspot {
-              _key
-              _type
-              x
-              y
-              height
-              width
-            }
-            asset {
-              _id
-            }
-          }
-          title
-          slug {
-            current
-          }
-        }
-      }
-    }
-  }
-`
