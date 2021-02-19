@@ -27,14 +27,16 @@ function Project (props) {
         </div>
       )}
       <Container>
-        <div className="grid grid-cols-1">
-          <div className="">
-            <h1 className="text-blue-500 hover:text-indigo-100">{title}</h1>
+        <div className="flex-1">
+          <div className="flex-1">
+            <h1 className="text-2xl font-bold p-4">{title}</h1>
+            <div className="p-4 text-left">
             {_rawBody && <BlockContent blocks={_rawBody || []} />}
+            </div>
           </div>
           <aside className="">
             {publishedAt && (
-              <div className="text-sm m-4 text-gray-300">
+              <div className="text-sm m-4 text-gray-600">
                 {differenceInDays(new Date(publishedAt), new Date()) > 3
                   ? distanceInWords(new Date(publishedAt), new Date())
                   : format(new Date(publishedAt), 'MMMM Do YYYY')}
