@@ -30,7 +30,7 @@ function Project (props) {
         <div className="flex-1">
           <div className="flex-1">
             <h1 className="text-2xl font-bold p-4">{title}</h1>
-            <div className="p-4 text-left">
+            <div className="p-0">
             {_rawBody && <BlockContent blocks={_rawBody || []} />}
             </div>
           </div>
@@ -45,7 +45,7 @@ function Project (props) {
             {members && members.length > 0 && <RoleList items={members} title='Project members' />}
             {categories && categories.length > 0 && (
               <div className="border-t-2 m-8">
-                <h3 className="text-base m-2">Categories</h3>
+                <h3 className="text-lg m-2">Categories</h3>
                 <ul>
                   {categories.map(category => (
                     <li key={category._id}>{category.title}</li>
