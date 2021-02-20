@@ -8,9 +8,7 @@ function HeroSection(props) {
       <Image/>             
     </div>
     <div className="md:grid md:grid-rows-2  md:ml-6 md:p-8 md:justify-center md:items-center">
-    <h2 className="grid text-sm mt-2  p-6">Made Architects Studio is an award-winning architectural and interior design practice delivering projects in aged care, retirement living, healthcare, hospitality, commercial, retail and residential sectors.
-
-MA Studio is currently running a Master of Architecture Design Thesis studio at the University of Melbourne.</h2>
+    <h2 className="grid text-sm mt-2  p-6">Convencidos de que la Arquitectura transmite sentimientos y emociones creamos Arqca. un taller de Arquitectura Integral, que tiene como objetivo diseñar espacios Funcionales, Estéticos e integrales con el medio Ambiente.</h2>
     <div className="inline-grid grid-cols-3 pl-8 justify-between">
     <a href="/page-2" className="p-2 text-blue-500"> Contacto</a>
     <a href="/archive" className="p-2 text-blue-500"> Proyectos</a>
