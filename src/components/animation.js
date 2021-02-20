@@ -1,39 +1,20 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react'
-import { useTransition, animated } from 'react-spring'
+import React from 'react'
+import {buildImageObj} from '../lib/helpers'
+import {imageUrlFor} from '../lib/image-url'
+import Image from "../components/image"
 
-function AnimationSpring() {
-  const ref = useRef([])
-  const [items, set] = useState([])
-  const transitions = useTransition(items, null, {
-    from: { opacity: 0, height: 0, innerHeight: 0, transform: 'perspective(600px) rotateX(0deg)', color: '#8fa5b6' },
-    enter: [
-      { opacity: 1, height: 80, innerHeight: 80 },
-      { transform: 'perspective(600px) rotateX(180deg)', color: '#28d79f' },
-      { transform: 'perspective(600px) rotateX(0deg)' },
-    ],
-    leave: [{ color: '#c23369' }, { innerHeight: 0 }, { opacity: 0, height: 0 }],
-    update: { color: '#28b4d7' },
-  })
-
-  const reset = useCallback(() => {
-    ref.current.map(clearTimeout)
-    ref.current = []
-    set([])
-    ref.current.push(setTimeout(() => set(['Arquitectura', 'Mobiliario', 'Diseño']), 2000))
-    ref.current.push(setTimeout(() => set(['Arquitectura', 'Diseño']), 5000))
-    ref.current.push(setTimeout(() => set(['Arquitectura', 'Mobiliario', 'Diseño']), 8000))
-  }, [])
-
-  useEffect(() => void reset(), [])
-
+function AnimationSpring(props) {
   return (
     <div>
-      {transitions.map(({ item, props: { innerHeight, ...rest }, key }) => (
-        <animated.div className="overflow-hidden w-full  flex justify-center items-center text-7xl font-extrabold uppercase flex-nowrap cursor-pointer leading-normal" key={key} style={rest} onClick={reset}>
-          <animated.div style={{ overflow: 'hidden', height: innerHeight }}>{item}</animated.div>
-        </animated.div>
-      ))}
+    <div className="grid grid-cols-1 overflow-hidden justify-between  max-h-40 object-cover gap-6 ">
+              <Image/>             
     </div>
+    <h2 className="grid text-sm mt-4 p-6">Made Architects Studio is an award-winning architectural and interior design practice delivering projects in aged care, retirement living, healthcare, hospitality, commercial, retail and residential sectors.
+
+    MA Studio is currently running a Master of Architecture Design Thesis studio at the University of Melbourne.</h2>
+    <a href="/page-2" className="p-6 text-blue-500"> Contacto</a>
+    </div>
+  
   )
 }
 
