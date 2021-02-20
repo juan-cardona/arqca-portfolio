@@ -8,11 +8,11 @@ function HeroSection(props) {
       <Image/>             
     </div>
     <div className="md:grid md:grid-rows-2  md:ml-6 md:p-8 md:justify-center md:items-center">
-    <h2 className="grid text-sm mt-2  p-6">Convencidos de que la Arquitectura transmite sentimientos y emociones creamos Arqca. un taller de Arquitectura Integral, que tiene como objetivo diseñar espacios Funcionales, Estéticos e integrales con el medio Ambiente.</h2>
+    <h2 className="grid text-sm mt-2 md:mx-8 px-8 py-6">Convencidos de que la Arquitectura transmite sentimientos y emociones creamos <h2 className="font-extrabold">Arqca.</h2> un taller de Arquitectura Integral, que tiene como objetivo diseñar espacios Funcionales, Estéticos e integrales con el medio Ambiente.</h2>
     <div className="inline-grid grid-cols-3 pl-8 justify-between">
-    <a href="/page-2" className="p-2 text-blue-500"> Contacto</a>
-    <a href="/archive" className="p-2 text-blue-500"> Proyectos</a>
-    <a href="/page-2" className="p-2 text-blue-500"> Nosotros</a>
+    <a href="/page-2" className="p-2 text-blue-600"> Contacto</a>
+    <a href="/archive" className="p-2 text-blue-600"> Proyectos</a>
+    <a href="/page-2" className="p-2 text-blue-600"> Nosotros</a>
     </div>
     </div>
     </div>
