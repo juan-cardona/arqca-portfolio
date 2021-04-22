@@ -11,7 +11,7 @@ function ContactPage() {
         title="Contact"
       />
       <section>
-        <form className="p-8"  method="POST" data-netlify="true">
+        <form className="p-8" name="contact" method="POST" data-netlify="true">
           <h2 className="mb-8 leading-loose">
             Contáctanos y te ayudaremos a escoger el mejor plan para tus necesidades{` `}
             <a
